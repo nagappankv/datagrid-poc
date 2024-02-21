@@ -58,7 +58,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-          <div style={{ height: '80%', width: '100%' }}>
+          <div style={{ height: '60%', width: '100%' }}>
       <DataGridNoSSR rows={rows} columns={columns} disableColumnFilter
         disableColumnSelector
         disableDensitySelector
