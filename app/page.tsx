@@ -48,7 +48,18 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('https://run.mocky.io/v3/75a6fdfb-c4a1-41af-b851-ce2b249c2a29');
+      const payload = {
+        "teamID": '659d6f66700c69bb055856db',
+      };
+  
+      // const res = await fetch('https://run.mocky.io/v3/75a6fdfb-c4a1-41af-b851-ce2b249c2a29');
+      const res = await fetch('https://calldynamics-gcp-production-osrbeh7pbq-uc.a.run.app/api/endpoint', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(payload), 
+      });
       const data = await res.json();
       setRows(data);
     }
