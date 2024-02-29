@@ -4,6 +4,8 @@ import Image from "next/image";
 import dynamic from 'next/dynamic';
 import {GridRowsProp, GridColDef  } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
+import Login from './Login';
+import ProtectedApiCall from './ProtectedApiCall';
 
 const DataGridNoSSR = dynamic(() => import('@mui/x-data-grid').then(mod => mod.DataGrid), {
   ssr: false, // Disable server-side rendering for this component
@@ -46,42 +48,31 @@ const columns: GridColDef[] = [
 export default function Home() {
   const [rows, setRows] = useState([]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const payload = {
-        "teamID": '659d6f66700c69bb055856db',
-      };
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const payload = {
+  //       "teamID": '659d6f66700c69bb055856db',
+  //     };
   
-      // const res = await fetch('https://run.mocky.io/v3/75a6fdfb-c4a1-41af-b851-ce2b249c2a29');
-      const res = await fetch('https://calldynamics-gcp-production-osrbeh7pbq-uc.a.run.app/api/endpoint', {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'application/json', 
-        },
-        body: JSON.stringify(payload), 
-      });
-      const data = await res.json();
-      setRows(data);
-    }
+  //     // const res = await fetch('https://run.mocky.io/v3/75a6fdfb-c4a1-41af-b851-ce2b249c2a29');
+  //     const res = await fetch('https://get-all-files-osrbeh7pbq-uc.a.run.app/v2/streamFile', {
+  //       method: 'POST', 
+  //       headers: {
+  //         'Content-Type': 'application/json', 
+  //       },
+  //       body: JSON.stringify(payload), 
+  //     });
+  //     const data = await res.json();
+  //     setRows(data);
+  //   }
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-          <div style={{ height: '60%', width: '100%' }}>
-      <DataGridNoSSR rows={rows} columns={columns} disableColumnFilter
-        disableColumnSelector
-        disableDensitySelector
-        pageSizeOptions={[5, 10, 20, 50, 100, 500]}
-        pagination
-        slotProps={{
-          toolbar: {
-            showQuickFilter: true,
-          },
-        }}
-        />
+    <div>
+      <Login />
+      <ProtectedApiCall />
     </div>
-    </main>
   );
 }
